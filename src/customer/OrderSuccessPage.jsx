@@ -7,12 +7,13 @@ import {
   StyleSheet,
 } from "react-native";
 
+
 const OrderSuccessPage = ({
   navigation,
 }) => {
   return (
     <View style={styles.container}>
-
+     
       <Text style={styles.icon}>
         ✅
       </Text>

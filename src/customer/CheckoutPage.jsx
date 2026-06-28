@@ -10,6 +10,7 @@ import {
 
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { Ionicons } from "@expo/vector-icons";
 
 const CheckoutSchema = Yup.object().shape({
   name: Yup.string()
@@ -34,6 +35,16 @@ const CheckoutPage = ({ navigation }) => {
   return (
     <View style={styles.container}>
 
+        <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
+        <Ionicons
+          name="arrow-back"
+          size={28}
+          color="black"
+        />
+      </TouchableOpacity>
       <Text style={styles.heading}>
         Checkout
       </Text>

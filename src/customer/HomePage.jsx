@@ -6,10 +6,16 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import Header from "../components/molecules/Header";
 
 const HomePage = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
+        <Header
+          navigation={navigation}
+          showBack={false}
+          title="Home"
+        />
 
       <Text style={styles.welcome}>
         Welcome 
@@ -95,6 +101,8 @@ const HomePage = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.actionButton}
+         onPress={() =>
+       navigation.navigate("ContactUs")}
       >
         <Text style={styles.actionText}>
           Contact Us
@@ -103,6 +111,8 @@ const HomePage = ({ navigation }) => {
 
          <TouchableOpacity
             style={styles.actionButton}
+             onPress={() =>
+              navigation.navigate("Reviews")}
             >
         <Text style={styles.actionText}>
           Reviews

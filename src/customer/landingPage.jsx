@@ -27,7 +27,7 @@ const LandingPage = ({ navigation }) => {
           <Button
         title="Get Started"
         onPress={() =>
-          navigation.navigate("LoginPage")
+          navigation.navigate("SignupPage")
         }
       />
 

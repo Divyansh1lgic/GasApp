@@ -9,6 +9,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
+import Header from "../components/molecules/Header";
 
 const GasDetailsPage = ({ route, navigation}) => {
 
@@ -20,8 +21,12 @@ const GasDetailsPage = ({ route, navigation}) => {
 
   return (
     <View style={styles.container}>
+          <Header
+        navigation={navigation}
+        title="Gas Details"
+      />
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
                   onPress={() =>
                   navigation.navigate("CartPage")
                    }
@@ -32,18 +37,18 @@ const GasDetailsPage = ({ route, navigation}) => {
                   size={30}
                   color="#0057D9"
                   /> 
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
-      <TouchableOpacity
-        style={styles.backButton}
-        onPress={() => navigation.goBack()}
-      >
-        <Ionicons
-          name="arrow-back"
-          size={28}
-          color="black"
-        />
-      </TouchableOpacity>
+          {/* <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.goBack()}
+          >
+            <Ionicons
+              name="arrow-back"
+              size={28}
+              color="black"
+            />
+          </TouchableOpacity> */}
       <Image 
        source={require("../assets/images/oxygenCylinder.jpg")}
        style ={styles.image}

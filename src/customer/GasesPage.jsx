@@ -3,7 +3,7 @@ import React from 'react'
 import { FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
-
+import Header from "../components/molecules/Header";
 
 const gases = [
   {
@@ -39,8 +39,13 @@ const gases = [
 const GasesPage = ({navigation}) => {
   return (
     <View style={styles.container}>
+      
+    <Header
+      navigation={navigation}
+      title="Gases"
+    />
 
-       <TouchableOpacity
+       {/* <TouchableOpacity
         style={styles.backButton}
         onPress={() => navigation.goBack()}
       >
@@ -49,11 +54,11 @@ const GasesPage = ({navigation}) => {
           size={28}
           color="black"
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
         <Text style = {styles.heading}>Industrial Gases</Text>
         
-          <TouchableOpacity
+          {/* <TouchableOpacity
            onPress={() =>
             navigation.navigate("CartPage")
              }
@@ -64,7 +69,7 @@ const GasesPage = ({navigation}) => {
                 size={28}
                 color="#0057D9"
               />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
         <FlatList 
         data={gases}

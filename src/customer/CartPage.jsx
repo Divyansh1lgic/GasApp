@@ -20,6 +20,8 @@ import {
   clearCart,
 } from "../redux/cartSlice";
 
+import Header from "../components/molecules/Header";
+
 import { Ionicons } from "@expo/vector-icons";
 
 const CartPage = ({ navigation }) => {
@@ -37,6 +39,10 @@ const CartPage = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+        <Header
+      navigation={navigation}
+      title="My Cart"
+    />
 
       <TouchableOpacity
         style={styles.backButton}

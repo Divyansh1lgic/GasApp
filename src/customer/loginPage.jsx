@@ -5,19 +5,21 @@ import {
   TextInput,        
   StyleSheet,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { Formik} from 'formik';
 import * as Yup from 'yup';
-
 import Button from "../components/atoms/Button";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/auth";
 
 const LoginPage = ({navigation})=>{
 
 
 const LoginSchema = Yup.object().shape({
- number: Yup.string().matches(/^[0-9]{10}$/, "Enter valid 10 digit number").required("Enter your number"),
+//  number: Yup.string().matches(/^[0-9]{10}$/, "Enter valid 10 digit number").required("Enter your number"),
  
- email:Yup.string().email("Enter valid email").required("Enter your email").required(" Email is required"),
+ email:Yup.string().email("Enter valid email").required("Enter your email"),
 
  password:Yup.string().min(6,"Atleast 6 digit password Required").required("Password needed"),
 });
@@ -27,22 +29,41 @@ return(<ImageBackground
         source={require("../assets/images/loginpage.jpg")}
         style={styles.imagebackground}
         >
-             <View style={styles.overlay}>
+      <View style={styles.overlay}>
         <Text style={styles.title}>
             Login
             </Text>
             <Formik
             initialValues={{
                 email: '',
-                number: '',
+                // number: '',
                 password: '',
             }}
             validationSchema={LoginSchema}
-              onSubmit={(values) => {
-                        console.log(values);
+             onSubmit={async (values) => {
+              try {
 
-                        navigation.navigate("HomePage");
-                    }}>
+                const userCredential =
+                  await signInWithEmailAndPassword(
+                    auth,
+                    values.email,
+                    values.password
+                  );
+
+                console.log(
+                  "Logged In User:",
+                  userCredential.user
+                );
+
+                navigation.navigate("HomePage");
+
+              } catch (error) {
+
+                console.log(error);
+
+                alert(error.message);
+              }
+            }}>
                 {({
                     handleChange,
                     handleSubmit,
@@ -65,7 +86,7 @@ return(<ImageBackground
                         </Text>
                         )}
 
-                    <TextInput 
+                    {/* <TextInput 
                     placeholder=" Enter Your Number"
                     keyboardType="phone-pad"
                     onChangeText={handleChange('number')}
@@ -78,7 +99,7 @@ return(<ImageBackground
                         <Text style={styles.error}>
                             {errors.number}
                             </Text>
-                    )}
+                    )} */}
 
                     <TextInput 
                     placeholder=" Enter Your Password"
@@ -97,10 +118,25 @@ return(<ImageBackground
                     <Button 
                     title='Login'
                     onPress={handleSubmit}
-                 
-
                     />
-                </>)}
+
+                    <TouchableOpacity
+                      onPress={() => navigation.navigate("SignupPage")}
+                    >
+                      <Text
+                        style={{
+                          marginTop: 20,
+                          textAlign: "center",
+                          color: "#0057D9",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Don't have an account? Sign Up
+                      </Text>
+                    </TouchableOpacity>
+                </>
+              )
+              }
 
 
                 </Formik>
