@@ -20,10 +20,20 @@
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.divyanshbajpai.gasapp"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b97c1e96-55a9-445c-a7c2-5fcd8f662ac3"
+      }
+    },
+    "owner": "divyasnh",
+    "plugins": [
+      "expo-font"
+    ]
   }
 }
