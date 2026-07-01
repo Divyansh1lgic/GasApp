@@ -14,6 +14,13 @@ import ReviewsPage from "../customer/ReviewsPage";
 import SignupPage from '../customer/SignupPage';
 import ProfilePage from "../customer/ProfilePage";
 
+import OwnerLoginPage from '../owner/OwnerLoginPage';
+import OwnerHomePage from '../owner/OwnerHomePage';
+import OwnerOrdersPage from "../owner/OwnerOrdersPage";
+import InventoryPage from "../owner/InventoryPage";
+import CustomersPage from "../owner/CustomersPage";
+import AnalyticsPage from "../owner/AnalyticsPage";
+
 const Stack = createNativeStackNavigator();
 
 export default function RootNavigator(){
@@ -33,6 +40,26 @@ export default function RootNavigator(){
         <Stack.Screen name="Reviews" component={ReviewsPage} />
         <Stack.Screen name="SignupPage" component={SignupPage} />
         <Stack.Screen  name="ProfilePage" component={ProfilePage}/>
+        <Stack.Screen name="OwnerLoginPage" component={OwnerLoginPage} />
+        <Stack.Screen name="OwnerHomePage" component={OwnerHomePage}/>
+        <Stack.Screen
+            name="OwnerOrdersPage"
+            component={OwnerOrdersPage}
+            />
+            <Stack.Screen
+            name="InventoryPage"
+            component={InventoryPage}
+            />
+
+            <Stack.Screen
+            name="CustomersPage"
+            component={CustomersPage}
+            />
+
+            <Stack.Screen
+            name="AnalyticsPage"
+            component={AnalyticsPage}
+            />
     </Stack.Navigator>
 </NavigationContainer>)
 }

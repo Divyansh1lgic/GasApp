@@ -4,37 +4,8 @@ import { FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 import Header from "../components/molecules/Header";
+import gases from "../data/gases";
 
-const gases = [
-  {
-    id: 1,
-    name: "Nitrogen Gas",
-    price: 1000,
-    available: true,
-    image: require("../assets/images/NitrogenGas.jpg"),
-  },
-  {
-    id: 2,
-    name: "Oxygen Gas",
-    price: 900,
-    available: true,
-    image: require("../assets/images/oxygenCylinder.jpg"),
-  },
-  {
-    id: 3,
-    name: "Argon Gas",
-    price: 1500,
-    available: false,
-    image: require("../assets/images/agrongas.jpg"),
-  },
-  {
-    id: 4,
-    name: "Helium Gas",
-    price: 2000,
-    available: true,
-    image: require("../assets/images/heliumgas.jpg"),
-  },
-];
 
 const GasesPage = ({navigation}) => {
   return (
@@ -91,9 +62,11 @@ const GasesPage = ({navigation}) => {
                 : "Out Of Stock ❌"}</Text>
                 <TouchableOpacity 
                 style={styles.button}
-                onPress={()=>
-                    navigation.navigate("GasDetails",{gas:item})
-                }>
+               onPress={() =>
+                navigation.navigate("GasDetails", {
+                    gasId: item.id,
+                })
+            }>
 
                 <Text style={styles.buttonText}>
                     View Details

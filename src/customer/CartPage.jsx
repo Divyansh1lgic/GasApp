@@ -20,6 +20,8 @@ import {
   clearCart,
 } from "../redux/cartSlice";
 
+
+
 import Header from "../components/molecules/Header";
 
 import { Ionicons } from "@expo/vector-icons";

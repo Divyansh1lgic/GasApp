@@ -134,6 +134,7 @@ const ProfilePage = ({ navigation }) => {
               }
             : require("../assets/images/profile.png")
         }
+         resizeMode="contain"
         style={styles.image}
       />
 

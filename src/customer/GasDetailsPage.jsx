@@ -10,12 +10,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
 import Header from "../components/molecules/Header";
+import gases from "../data/gases";
 
 const GasDetailsPage = ({ route, navigation}) => {
 
   const dispatch = useDispatch();
 
-  const { gas }= route.params;
+  const { gasId } = route.params;
+
+    const gas = gases.find(
+        item => item.id === gasId
+    );
 
   const[quantity, setQuantity]=useState(1);
 

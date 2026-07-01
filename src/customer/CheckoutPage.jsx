@@ -11,6 +11,18 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
+
+import { auth } from "../firebase/auth";
+import { db } from "../firebase/firestore";
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import CustomModal from "../components/molecules/CustomModal";
+import { clearCart } from "../redux/cartSlice";
 
 const CheckoutSchema = Yup.object().shape({
   name: Yup.string()
@@ -29,8 +41,22 @@ const CheckoutSchema = Yup.object().shape({
 
 const CheckoutPage = ({ navigation }) => {
 
-  const [paymentMethod, setPaymentMethod] =
+    const [paymentMethod, setPaymentMethod] =
     useState("COD");
+    const [showModal, setShowModal] = useState(false);
+    
+
+    const dispatch = useDispatch();
+
+      const cartItems = useSelector(
+        state => state.cart.cartItems
+      );
+
+      const totalAmount = cartItems.reduce(
+        (acc, item) =>
+          acc + item.price * item.quantity,
+        0
+      );
 
   return (
     <View style={styles.container}>
@@ -58,14 +84,54 @@ const CheckoutPage = ({ navigation }) => {
 
         validationSchema={CheckoutSchema}
 
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
 
-          console.log(values);
+          try {
 
-          navigation.navigate(
-            "OrderSuccess"
-          );
-        }}
+            const user = auth.currentUser;
+
+            if (!user) {
+              alert("Please login first");
+              return;
+            }
+
+            await addDoc(collection(db, "orders"), {
+
+              userId: user.uid,
+
+              customerName: values.name,
+
+              phone: values.phone,
+
+              address: values.address,
+
+              paymentMethod: paymentMethod,
+
+              items: cartItems,
+
+              totalAmount: totalAmount,
+
+              status: "Pending",
+
+              orderedAt: serverTimestamp(),
+
+              });
+
+              dispatch(clearCart());
+
+              setShowModal(true);
+
+                }
+
+              catch (error) {
+
+                console.log(error);
+
+                alert(error.message);
+
+              }
+
+            }}
       >
         {({
           handleChange,
@@ -169,6 +235,20 @@ const CheckoutPage = ({ navigation }) => {
           </>
         )}
       </Formik>
+
+      <CustomModal
+        visible={showModal}
+        title="Order Successful"
+        message="Your order has been placed successfully. We will contact you shortly."
+        buttonText="Continue"
+        onPress={() => {
+
+            setShowModal(false);
+
+            navigation.replace("OrderSuccess");
+
+        }}
+    />
 
     </View>
   );
